@@ -11,7 +11,7 @@
     justify-content: space-evenly;
 }
 
-.meny button {
+button {
     border: 2px solid black;
     width: 6vw;
     min-width: 10vw;
