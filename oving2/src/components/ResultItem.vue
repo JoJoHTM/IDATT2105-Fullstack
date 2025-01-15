@@ -1,6 +1,6 @@
 <template>
     <div id="result">
-        55555
+        
     </div>
 </template>
 <style scoped>

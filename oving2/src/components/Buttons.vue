@@ -1,22 +1,32 @@
-<template>
-    <div id="button">
-        1
-    </div>
-</template>
+<script setup>
+    import { onMounted } from 'vue';
 
-<style scoped>
-
-    #button {
-        background-color: rgb(81, 76, 76);
-        border-radius: 10px;
-        color: white;
-        grid-column: 1 / span 2;
-        grid-row: 2 / span 3;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 40%;
-        height: 40%;
+    function duplicateButton() {
+        var columnStart = 1;
+        var columnEnd = 2;
+        var rowStart = 2;
+        var rowEnd = 3;
+        var counter = 1;
+        for (let j = 0; j < 3; j++) {
+            for (let i = 0; i < 4; i++) {
+                var newButton = document.createElement("button");
+                newButton.setAttribute("id", `button`);
+                newButton.textContent = `${counter}`;
+                newButton.setAttribute("style", `grid-column: ${columnStart}/${columnEnd};`);
+                newButton.setAttribute("style", `grid-row: ${rowStart}/${rowEnd};`);
+                document.getElementById("frame").appendChild(newButton);
+                columnStart++;
+                columnEnd++;
+                counter++;
+            }
+            rowStart++;
+            rowEnd++;
+            columnStart = 1;
+            columnEnd = 2;
+        }
     }
 
-</style>
+    onMounted(() => {
+        duplicateButton();
+    });
+</script>
