@@ -20,6 +20,6 @@
 
 <template>
     <div id="history">
-        <h3>Logg</h3>
+        <h3 >Logg</h3>
     </div>
 </template>
