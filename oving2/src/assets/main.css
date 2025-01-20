@@ -8,15 +8,29 @@
   background-color: rgb(232, 225, 225);
 }
 
-#button {
+#result {
+  background-color: rgb(81, 76, 76);
+  border-radius: 10px;
+  color: white;
+  grid-column: 1 / span 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  height:100%;
+}
+
+button {
   background-color: rgb(81, 76, 76);
   margin: 10px;
   border-radius: 10px;
   color: white;
-  grid-column: 1 / 2;
-  grid-row: 2 /  3;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 20px;
+}
+
+#equals {
+  background-color: orange;
 }

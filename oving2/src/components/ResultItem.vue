@@ -1,16 +1,12 @@
+<script setup>
+    import { ref, inject } from 'vue';
+    const currentValue = inject('currentValue');
+    const totalValue = inject('totalValue');
+</script>
+
+
 <template>
     <div id="result">
-        
+        {{ currentValue }}
     </div>
 </template>
-<style scoped>
-    #result {
-        background-color: rgb(81, 76, 76);
-        border-radius: 10px;
-        color: white;
-        grid-column: 1 / span 4;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
