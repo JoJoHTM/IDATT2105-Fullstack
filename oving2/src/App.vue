@@ -14,9 +14,11 @@
 
 <template>
   <div id="frame">
-    <ResultItem />
-    <Buttons />
+    <div id="calculatorFrame">
+      <ResultItem />
+      <Buttons />
+    </div>
+    <History />
   </div>
-  <History />
 </template>
 

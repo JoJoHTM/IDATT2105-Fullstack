@@ -1,9 +1,15 @@
 #frame {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: start;
+}
+
+#calculatorFrame {
   border-radius: 10px;
   display: grid;
   grid-template-columns: auto auto auto auto;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-  width: 50vw;
+  width: 40vw;
   height: 70vh;
   background-color: rgb(232, 225, 225);
 }
@@ -36,18 +42,17 @@ button {
 }
 
 #history {
-  display: grid;
-  grid-template-rows:auto;
   border: solid black;
-  width: 30vw;
+  width: 20vw;
   height: 40vh;
+  overflow-y: scroll;
 }
 
 .row {
+  margin-top: 0;
   display: flex;
-  height:fit-content;
   justify-content: center;
-  align-items: center;
-  font-size: 15px;
-  border-bottom: solid black;
+  height:fit-content;
+  font-size: 18px;
+  border-bottom: dotted black;
 }

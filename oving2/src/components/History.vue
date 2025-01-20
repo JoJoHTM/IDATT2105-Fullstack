@@ -6,7 +6,7 @@
 
         function addRow() {
             let history = document.getElementById('history');
-            let row = document.createElement('div');
+            let row = document.createElement('li');
             row.className = 'row';
             row.innerHTML = operations.value.join('') + ' = ' + eval(operations.value.join(''));
             history.appendChild(row);
@@ -23,3 +23,10 @@
         <h3 >Logg</h3>
     </div>
 </template>
+
+<style scoped>
+h3 {
+    text-align:center;
+    height: fit-content;
+}
+</style>
