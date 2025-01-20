@@ -1,8 +1,8 @@
 #frame {
   border-radius: 10px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   width: 50vw;
   height: 70vh;
   background-color: rgb(232, 225, 225);
@@ -33,4 +33,21 @@ button {
 
 #equals {
   background-color: orange;
+}
+
+#history {
+  display: grid;
+  grid-template-rows:auto;
+  border: solid black;
+  width: 30vw;
+  height: 40vh;
+}
+
+.row {
+  display: flex;
+  height:fit-content;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  border-bottom: solid black;
 }

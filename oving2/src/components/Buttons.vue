@@ -1,8 +1,11 @@
 <script setup>
     import { inject, ref } from 'vue';
+    import { useRow } from './History.vue';
+    
+    const { addRow } = useRow();
     const currentValue = inject('currentValue');
     const totalValue = inject('totalValue');
-    const operations = [];
+    const operations = inject('operations');
     const prevAnswer = ref(0);
 
     function changeCurrentValue(event) {
@@ -35,8 +38,8 @@
     }
 
     function addOperation(operation) {
-        operations.push(currentValue.value);
-        operations.push(operation);
+        operations.value.push(currentValue.value);
+        operations.value.push(operation);
         currentValue.value = 0;
     }
 
@@ -45,9 +48,10 @@
     }
 
     function equals() {
-        operations.push(currentValue.value);
-        totalValue.value = eval(operations.join(''));
-        operations.length = 0;
+        operations.value.push(currentValue.value);
+        totalValue.value = eval(operations.value.join(''));
+        addRow();
+        operations.value.length = 0;
         currentValue.value = totalValue.value;
         prevAnswer.value = totalValue.value;
     }
@@ -58,7 +62,7 @@
     <button id="clear" @click="clear">C</button>
     <button id="answer" @click="answer">ANS</button>
     <button id="delete" @click="deleteLast">DEL</button>
-    <button id="plus" @click="addOperation('+')">+</button>
+    <button id="plus" @click="() => addOperation('+')">+</button>
     <button class="number" value="1" @click="changeCurrentValue">1</button>
     <button class="number" value="2" @click="changeCurrentValue">2</button>
     <button class="number" value="3" @click="changeCurrentValue">3</button>

@@ -7,6 +7,6 @@
 
 <template>
     <div id="result">
-        {{ currentValue }}
+        {{ currentValue == 0 ? ' ' : currentValue }}
     </div>
 </template>
