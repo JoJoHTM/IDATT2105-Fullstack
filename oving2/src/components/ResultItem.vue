@@ -7,6 +7,6 @@
 
 <template>
     <div id="result">
-        {{ currentValue == 0 ? ' ' : currentValue }}
+        {{ currentValue == "Infinity" ? 'Kan ikke dele på null' : currentValue }}
     </div>
 </template>

@@ -8,7 +8,8 @@
             let history = document.getElementById('history');
             let row = document.createElement('li');
             row.className = 'row';
-            row.innerHTML = operations.value.join('') + ' = ' + eval(operations.value.join(''));
+            let result = eval(operations.value.join(''));   
+            row.innerHTML = operations.value.join('') + ' = ' + (result == "Infinity" ? 'Udefinert' : result);
             history.appendChild(row);
         }
         return { addRow };

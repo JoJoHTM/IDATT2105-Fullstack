@@ -6,10 +6,11 @@
     const currentValue = inject('currentValue');
     const totalValue = inject('totalValue');
     const operations = inject('operations');
-    const prevAnswer = ref(0);
+    const prevAnswer = ref("0");
+    const paranthesis = ref(false);
 
     function changeCurrentValue(event) {
-        if (currentValue.value == 0) {
+        if (currentValue.value == "0") {
             if (event.target.value != ",") {
                 currentValue.value = event.target.value;
             }
@@ -25,35 +26,67 @@
         }
     }
 
+    function setParanthesis() {
+        if (currentValue.value != "0") {
+            operations.value.push(currentValue.value);
+            currentValue.value = "0";
+        }
+        if (paranthesis.value == false) {
+            operations.value.push("(")
+            paranthesis.value = true;
+        } 
+        else {
+            operations.value.push(")")
+            paranthesis.value = false;
+        }
+    }
+
     function deleteLast() {
-        if (currentValue.value.length != 1 && currentValue.value != 0) {
-            currentValue.value = currentValue.value.slice(0, -1);
-        } else if (currentValue.value.length == 1 && currentValue.value != 0) {
-            currentValue.value = 0;
+        if (currentValue.value.length != 1 && currentValue.value != "0") {
+            currentValue.value = currentValue.value.slice(0, -1)
+        } else if (currentValue.value.length == 1 && currentValue.value != "0") {
+            currentValue.value = "0";
         }
     }
 
     function clear() {
-        currentValue.value = 0;
+        currentValue.value = "0";
     }
 
     function addOperation(operation) {
-        operations.value.push(currentValue.value);
+        if (currentValue.value != "0") {
+            operations.value.push(currentValue.value);
+            currentValue.value = "0";
+        }
         operations.value.push(operation);
-        currentValue.value = 0;
     }
 
     function answer() {
-        currentValue.value = prevAnswer.value;
+        currentValue.value = prevAnswer.value.toString();
     }
 
     function equals() {
-        operations.value.push(currentValue.value);
-        totalValue.value = eval(operations.value.join(''));
-        addRow();
-        operations.value.length = 0;
-        currentValue.value = totalValue.value;
-        prevAnswer.value = totalValue.value;
+        if (operations.value[operations.value.length - 1] == ')' && currentValue.value == "0") {
+            
+        }
+        else {
+            console.log(operations.value[operations.value.length - 1]);
+            operations.value.push(currentValue.value);
+        }
+
+        try {
+            totalValue.value = eval(operations.value.join('')).toString();
+            console.log(operations.value);
+            addRow();
+            operations.value.length = 0;
+            currentValue.value = totalValue.value;
+            prevAnswer.value = totalValue.value;
+        } catch (error) {
+            console.error("Error evaluating expression:", error);
+            totalValue.value = "Error";
+            currentValue.value = totalValue.value;
+            operations.value.length = 0;
+        }
     }
 </script>
 
@@ -75,9 +108,8 @@
     <button class="number" value="8" @click="changeCurrentValue">8</button>
     <button class="number" value="9" @click="changeCurrentValue">9</button>
     <button id="divide" @click="addOperation('/')">/</button>
-    <button></button>
+    <button id="paranthesis" @click="setParanthesis()">( )</button>
     <button class="number" value="0" @click="changeCurrentValue">0</button>
     <button id="comma" value="," @click="changeCurrentValue">,</button>
     <button id="equals" @click="equals">=</button>
 </template>
-

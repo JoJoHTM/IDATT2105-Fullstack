@@ -4,8 +4,8 @@
   import History from './components/History.vue';
 
   import { ref, provide } from 'vue';
-  const currentValue = ref(0);
-  const totalValue = ref(0);
+  const currentValue = ref("0");
+  const totalValue = ref("0");
   const operations = ref([]);
   provide('currentValue', currentValue);
   provide('totalValue', totalValue);
