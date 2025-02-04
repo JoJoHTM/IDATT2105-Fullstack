@@ -1,13 +1,25 @@
+// TODO statemanagement
+
+<script setup>
+import { ref, computed } from 'vue';
+const name = ref('');
+const email = ref('');
+const feedback = ref(''); 
+const disableSubmit = computed(() => {
+    return name.value === '' || email.value === '' || feedback.value === '';
+});
+</script>
+
 <template>
-    <h1>Feedback</h1>
-        <form @submit.prevent="sendFeedback">
-            <label for="navn">Navn:</label>
-            <input type="text" placeholder="navn" name="navn" id="navn"></input>
+    <h1 style="text-align: center;">Feedback</h1>
+        <form>
+            <label for="name">Navn:</label>
+            <input type="text" placeholder="name" name="name" id="name" v-model="name"></input>
             <label for="email">E-post:</label>
-            <input type="email" placeholder="email" id="email" name="email"></input>
-            <label for="tilbakemelding" id="tilbakemeldingtekst">Tilbakemelding:</label>
-            <textarea placeholder="skriv din tilbakemelding her" name="tilbakemelding" id="tilbakemelding"></textarea>
-            <input type="submit" value="Send" id="submit"></input>
+            <input type="email" placeholder="email" id="email" name="email" v-model="email"></input>
+            <label for="feedback" id="feedbacktekst">Tilbakemelding:</label>
+            <textarea placeholder="skriv din tilbakemelding her" name="feedback" id="feedback" v-model="feedback"></textarea>
+            <input type="submit" value="Send" id="submit" :disabled="disableSubmit"></input>
         </form>
 </template>
 
@@ -15,14 +27,15 @@
 form {
     display: grid;
     grid-template-areas: 
-        'navnlabel navn navn'
+        'namelabel name name'
         'emaillabel email email'
-        'tilbakemeldinglabel tilbakemelding tilbakemelding'
+        'feedbacklabel feedback feedback'
         'send send send';
 
     grid-template-columns: auto auto;
-    width: 40%;
+    width: 30vw;
     height: 60vh;
+    min-width: 300px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid black;
@@ -33,14 +46,14 @@ label {
     font-size: 19px;
 }
 
-#navn:focus,
+#name:focus,
 #email:focus {
     outline: none;
     border-bottom: 2px solid black;
 }
 
-#navn {
-    grid-area: navn;
+#name {
+    grid-area: name;
     height: fit-content;
     border: none;
     border-bottom: 2px solid gray;
@@ -53,9 +66,10 @@ label {
     border-bottom: 2px solid gray;
 }
 
-#tilbakemelding {
-    grid-area: tilbakemelding;
+#feedback {
+    grid-area: feedback;
     resize: none;
+    border: 2px solid gray;
 }
 
 #submit {
