@@ -1,24 +1,20 @@
 // TODO statemanagement
 
 <script setup>
-import { ref, computed } from 'vue';
-const name = ref('');
-const email = ref('');
-const feedback = ref(''); 
-const disableSubmit = computed(() => {
-    return name.value === '' || email.value === '' || feedback.value === '';
-});
+import store from '../store.js';
+
+const { state, disableSubmit } = store;
 </script>
 
 <template>
     <h1 style="text-align: center;">Feedback</h1>
         <form>
             <label for="name">Navn:</label>
-            <input type="text" placeholder="name" name="name" id="name" v-model="name"></input>
+            <input type="text" placeholder="name" name="name" id="name" v-model="state.feedbackData.name"></input>
             <label for="email">E-post:</label>
-            <input type="email" placeholder="email" id="email" name="email" v-model="email"></input>
+            <input type="email" placeholder="email" id="email" name="email" v-model="state.feedbackData.email"></input>
             <label for="feedback" id="feedbacktekst">Tilbakemelding:</label>
-            <textarea placeholder="skriv din tilbakemelding her" name="feedback" id="feedback" v-model="feedback"></textarea>
+            <textarea placeholder="skriv din tilbakemelding her" name="feedback" id="feedback" v-model="state.feedbackData.feedback"></textarea>
             <input type="submit" value="Send" id="submit" :disabled="disableSubmit"></input>
         </form>
 </template>
