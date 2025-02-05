@@ -1,22 +1,31 @@
-// TODO statemanagement
 
 <script setup>
+import { ref } from 'vue';
 import store from '../store.js';
+import json from '../assets/formSubmission.json';
 
 const { state, disableSubmit } = store;
+const submitted = ref(false);
+
+
 </script>
 
 <template>
     <h1 style="text-align: center;">Feedback</h1>
-        <form>
-            <label for="name">Navn:</label>
-            <input type="text" placeholder="name" name="name" id="name" v-model="state.feedbackData.name"></input>
-            <label for="email">E-post:</label>
-            <input type="email" placeholder="email" id="email" name="email" v-model="state.feedbackData.email"></input>
-            <label for="feedback" id="feedbacktekst">Tilbakemelding:</label>
-            <textarea placeholder="skriv din tilbakemelding her" name="feedback" id="feedback" v-model="state.feedbackData.feedback"></textarea>
-            <input type="submit" value="Send" id="submit" :disabled="disableSubmit"></input>
-        </form>
+    <Transition>
+        <div v-if="submitted" style="text-align: center;">
+            <h2>Takk for tilbakemeldingen!</h2>
+        </div>
+    </Transition>
+    <form @submit="submitted = true" v-if="!submitted">
+        <label for="name">Navn:</label>
+        <input type="text" placeholder="name" name="name" id="name" v-model="state.feedbackData.name" required></input>
+        <label for="email">E-post:</label>
+        <input type="email" placeholder="email" id="email" name="email" v-model="state.feedbackData.email" required></input>
+        <label for="feedback" id="feedbacktekst">Tilbakemelding:</label>
+        <textarea placeholder="skriv din tilbakemelding her" name="feedback" id="feedback" v-model="state.feedbackData.feedback" required></textarea>
+        <input type="submit" value="Send" id="submit" :disabled="disableSubmit"></input>
+    </form>
 </template>
 
 <style scoped>
@@ -28,7 +37,6 @@ form {
         'feedbacklabel feedback feedback'
         'send send send';
 
-    grid-template-columns: auto auto;
     width: 30vw;
     height: 60vh;
     min-width: 300px;
