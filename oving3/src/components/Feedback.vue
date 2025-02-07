@@ -6,6 +6,7 @@ const name = ref('');
 const email = ref('');
 const feedback = ref(''); 
 const disableSubmit = computed(() => {
+    console.log("meow");
     return name.value === '' || email.value === '' || feedback.value === '';
 });
 </script>
