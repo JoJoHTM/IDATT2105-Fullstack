@@ -1,11 +1,12 @@
 <script setup>
-    import { ref, inject } from 'vue';
-    const currentValue = inject('currentValue');
+    import store from '../store.js';
+
+    const { state } = store;
 </script>
 
 
 <template>
     <div id="result">
-        {{ currentValue == "Infinity" ? 'Kan ikke dele på null' : currentValue }}
+        {{ state.calculatorData.currentValue == "Infinity" ? 'Kan ikke dele på null' : state.calculatorData.currentValue }}
     </div>
 </template>

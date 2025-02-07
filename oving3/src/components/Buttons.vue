@@ -1,91 +1,92 @@
 <script setup>
-    import { inject, ref } from 'vue';
+    import { ref } from 'vue';
     import { useRow } from './History.vue';
+    import store from '../store.js';
     
     const { addRow } = useRow();
-    const currentValue = inject('currentValue');
-    const totalValue = inject('totalValue');
-    const operations = inject('operations');
+
     const prevAnswer = ref("0");
     const paranthesis = ref(false);
 
+    const { state } = store;
+
     function changeCurrentValue(event) {
-        if (currentValue.value == "0") {
+        if (state.calculatorData.currentValue == "0") {
             if (event.target.value != ",") {
-                currentValue.value = event.target.value;
+                state.calculatorData.currentValue = event.target.value;
             }
         } else {
             if (event.target.value == ",") {
-                if (!currentValue.value.includes(",")) {
-                    currentValue.value += event.target.value;
+                if (!state.calculatorData.currentValue.includes(",")) {
+                    state.calculatorData.currentValue += event.target.value;
                 }
             }
             else {
-                currentValue.value += event.target.value;
+                state.calculatorData.currentValue += event.target.value;
             }
         }
     }
 
     function setParanthesis() {
-        if (currentValue.value != "0") {
-            operations.value.push(currentValue.value);
-            currentValue.value = "0";
+        if (state.calculatorDatacurrentValue != "0") {
+            state.calculatorData.operations.push(state.calculatorData.currentValue);
+            state.calculatorData.currentValue = "0";
         }
         if (paranthesis.value == false) {
-            operations.value.push("(")
+            state.calculatorData.operations.push("(")
             paranthesis.value = true;
         } 
         else {
-            operations.value.push(")")
+            state.calculatorData.operations.push(")")
             paranthesis.value = false;
         }
     }
 
     function deleteLast() {
-        if (currentValue.value.length != 1 && currentValue.value != "0") {
-            currentValue.value = currentValue.value.slice(0, -1)
-        } else if (currentValue.value.length == 1 && currentValue.value != "0") {
-            currentValue.value = "0";
+        if (state.calculatorData.currentValue.length != 1 && state.calculatorData.currentValue != "0") {
+            state.calculatorData.currentValue = state.calculatorData.currentValue.slice(0, -1)
+        } else if (state.calculatorData.currentValue.length == 1 && state.calculatorData.currentValue != "0") {
+            state.calculatorData.currentValue = "0";
         }
     }
 
     function clear() {
-        currentValue.value = "0";
+        state.calculatorData.currentValue = "0";
     }
 
     function addOperation(operation) {
-        if (currentValue.value != "0") {
-            operations.value.push(currentValue.value);
-            currentValue.value = "0";
+        if (state.calculatorData.currentValue != "0") {
+            state.calculatorData.operations.push(state.calculatorData.currentValue);
+            state.calculatorData.currentValue = "0";
         }
-        operations.value.push(operation);
+        state.calculatorData.operations.push(operation);
     }
 
     function answer() {
-        currentValue.value = prevAnswer.value.toString();
+        state.calculatorData.currentValue = prevAnswer.value.toString();
     }
 
     function equals() {
-        if (operations.value[operations.value.length - 1] == ')' && currentValue.value == "0") {
+        if (state.calculatorData.operations[state.calculatorData.operations.length - 1] == ')' && state.calculatorData.currentValue == "0") {
             
         }
         else {
-            console.log(operations.value[operations.value.length - 1]);
-            operations.value.push(currentValue.value);
+            console.log(state.calculatorData.operations[state.calculatorData.operations.length - 1]);
+            state.calculatorData.operations.push(state.calculatorData.currentValue);
         }
 
         try {
-            totalValue.value = eval(operations.value.join('')).toString();
-            console.log(operations.value);
+            state.calculatorData.totalValue = eval(state.calculatorData.operations.join('')).toString();
+            console.log(state.calculatorData.operations);
             addRow();
-            operations.value.length = 0;
-            currentValue.value = totalValue.value;
-            prevAnswer.value = totalValue.value;
+            state.calculatorData.operations.length = 0;
+            state.calculatorData.currentValue = state.calculatorData.totalValue;
+            prevAnswer.value = state.calculatorData.totalValue;
         } catch (error) {
             console.error("Error evaluating expression:", error);
-            totalValue.value = "Error";
-            currentValue.value = totalValue.value;
-            operations.value.length = 0;
+            state.calculatorData.totalValue = "Error";
+            state.calculatorData.currentValue = state.calculatorData.totalValue;
+            state.calculatorData.operations.length = 0;
         }
     }
 </script>

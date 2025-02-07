@@ -1,15 +1,16 @@
 <script>
-    import { inject } from 'vue';
+    import store from '../store.js';
+
+    const { state } = store;
 
     export function useRow() {
-        const operations = inject('operations');
 
         function addRow() {
             let history = document.getElementById('history');
             let row = document.createElement('li');
             row.className = 'row';
-            let result = eval(operations.value.join(''));   
-            row.innerHTML = operations.value.join('') + ' = ' + (result == "Infinity" ? 'Udefinert' : result);
+            let result = eval(state.calculatorData.operations.join(''));   
+            row.innerHTML = state.calculatorData.operations.join('') + ' = ' + (result == "Infinity" ? 'Udefinert' : result);
             history.appendChild(row);
         }
         return { addRow };
