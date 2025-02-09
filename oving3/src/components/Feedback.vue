@@ -1,16 +1,7 @@
 
 <script setup>
-<<<<<<< HEAD
-import { ref, computed } from 'vue';
-const name = ref('');
-const email = ref('');
-const feedback = ref(''); 
-const disableSubmit = computed(() => {
-    console.log("meow");
-    return name.value === '' || email.value === '' || feedback.value === '';
-});
-=======
 import { ref } from 'vue';
+import RouterButtons from './RouterButtons.vue';
 import store from '../store.js';
 import json from '../assets/formSubmission.json';
 
@@ -18,11 +9,11 @@ const { state, disableSubmit } = store;
 const submitted = ref(false);
 
 
->>>>>>> 05c70bf4185fda1460af07bafc6c4d84cda0c258
 </script>
 
 <template>
-    <h1 style="text-align: center;">Feedback</h1>
+    <h1 style="text-align: center;">Tilbakemelding</h1>
+    <RouterButtons />
     <Transition>
         <div v-if="submitted" style="text-align: center;">
             <h2>Takk for tilbakemeldingen!</h2>
@@ -30,11 +21,11 @@ const submitted = ref(false);
     </Transition>
     <form @submit="submitted = true" v-if="!submitted">
         <label for="name">Navn:</label>
-        <input type="text" placeholder="name" name="name" id="name" v-model="state.feedbackData.name" required></input>
+        <input type="text" placeholder="Navn" name="name" id="name" v-model="state.feedbackData.name" required></input>
         <label for="email">E-post:</label>
-        <input type="email" placeholder="email" id="email" name="email" v-model="state.feedbackData.email" required></input>
+        <input type="email" placeholder="Email" id="email" name="email" v-model="state.feedbackData.email" required></input>
         <label for="feedback" id="feedbacktekst">Tilbakemelding:</label>
-        <textarea placeholder="skriv din tilbakemelding her" name="feedback" id="feedback" v-model="state.feedbackData.feedback" required></textarea>
+        <textarea placeholder="Skriv din tilbakemelding her" name="feedback" id="feedback" v-model="state.feedbackData.feedback" required></textarea>
         <input type="submit" value="Send" id="submit" :disabled="disableSubmit"></input>
     </form>
 </template>
