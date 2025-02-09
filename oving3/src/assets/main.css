@@ -1,7 +1,8 @@
 #frame {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: start;
+  display: flex;
+  margin-top: 100px;
+  justify-content: center;
+  gap: 20px;
 }
 
 #calculatorFrame {
@@ -37,15 +38,22 @@ button {
   font-size: 20px;
 }
 
+button:hover {
+  background-color: rgb(43, 42, 42);
+}
 #equals {
   background-color: orange;
 }
+#equals:hover {
+  background-color: rgb(177, 116, 3);
+}
 
 #history {
-  border: solid black;
+  border: solid rgb(81, 76, 76);
   width: 20vw;
   height: 40vh;
   overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .row {
