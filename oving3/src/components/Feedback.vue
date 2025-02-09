@@ -1,15 +1,5 @@
 
 <script setup>
-<<<<<<< HEAD
-import { ref, computed } from 'vue';
-const name = ref('');
-const email = ref('');
-const feedback = ref(''); 
-const disableSubmit = computed(() => {
-    console.log("meow");
-    return name.value === '' || email.value === '' || feedback.value === '';
-});
-=======
 import { ref } from 'vue';
 import store from '../store.js';
 import json from '../assets/formSubmission.json';
@@ -18,7 +8,6 @@ const { state, disableSubmit } = store;
 const submitted = ref(false);
 
 
->>>>>>> 05c70bf4185fda1460af07bafc6c4d84cda0c258
 </script>
 
 <template>

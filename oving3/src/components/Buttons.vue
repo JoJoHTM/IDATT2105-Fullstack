@@ -89,6 +89,10 @@
             state.calculatorData.operations.length = 0;
         }
     }
+
+    defineExpose({
+        clear
+    })
 </script>
 
 
