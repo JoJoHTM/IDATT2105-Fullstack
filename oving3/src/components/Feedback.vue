@@ -21,11 +21,11 @@ const submitted = ref(false);
     </Transition>
     <form @submit="submitted = true" v-if="!submitted">
         <label for="name">Navn:</label>
-        <input type="text" placeholder="Navn" name="name" id="name" v-model="state.feedbackData.name" required></input>
+        <input type="text" placeholder="Navn" id="name" v-model="state.feedbackData.name" required></input>
         <label for="email">E-post:</label>
-        <input type="email" placeholder="Email" id="email" name="email" v-model="state.feedbackData.email" required></input>
+        <input type="email" placeholder="Email" id="email" v-model="state.feedbackData.email" required></input>
         <label for="feedback" id="feedbacktekst">Tilbakemelding:</label>
-        <textarea placeholder="Skriv din tilbakemelding her" name="feedback" id="feedback" v-model="state.feedbackData.feedback" required></textarea>
+        <textarea placeholder="Skriv din tilbakemelding her" id="feedback" v-model="state.feedbackData.feedback" required></textarea>
         <input type="submit" value="Send" id="submit" :disabled="disableSubmit"></input>
     </form>
 </template>
