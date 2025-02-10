@@ -1,30 +1,46 @@
-
 <script setup>
-import { ref } from 'vue';
+import RouterButtons from './RouterButtons.vue';
 import store from '../store.js';
+import axios from 'axios';
 import json from '../assets/formSubmission.json';
 
 const { state, disableSubmit } = store;
-const submitted = ref(false);
 
+function showPopup() {
+    const popup = document.getElementById('popup');
+    axios.get("http://localhost:3000/response").then(response => {
+        const data = response.data.success;
+        popup.getElementsByTagName('h2')[0].innerText = data;
+    })
+    popup.showModal();
+}
 
+const submitForm = async (event) => {
+    event.preventDefault();
+    showPopup();
+}
+
+function closePopUp() {
+    const popup = document.getElementById('popup');
+    popup.close();
+}
 </script>
 
 <template>
-    <h1 style="text-align: center;">Feedback</h1>
-    <Transition>
-        <div v-if="submitted" style="text-align: center;">
-            <h2>Takk for tilbakemeldingen!</h2>
-        </div>
-    </Transition>
-    <form @submit="submitted = true" v-if="!submitted">
+    <h1 style="text-align: center;">Tilbakemelding</h1>
+    <RouterButtons />
+    <dialog id="popup">
+        <h2></h2>
+        <button @click="closePopUp" id="closeButton">X</button>
+    </dialog>
+    <form @submit="submitForm">
         <label for="name">Navn:</label>
-        <input type="text" placeholder="name" name="name" id="name" v-model="state.feedbackData.name" required></input>
+        <input type="text" placeholder="Navn" id="name" v-model="state.feedbackData.name" required></input>
         <label for="email">E-post:</label>
-        <input type="email" placeholder="email" id="email" name="email" v-model="state.feedbackData.email" required></input>
+        <input type="email" placeholder="Email" id="email" v-model="state.feedbackData.email" required></input>
         <label for="feedback" id="feedbacktekst">Tilbakemelding:</label>
-        <textarea placeholder="skriv din tilbakemelding her" name="feedback" id="feedback" v-model="state.feedbackData.feedback" required></textarea>
-        <input type="submit" value="Send" id="submit" :disabled="disableSubmit"></input>
+        <textarea placeholder="Skriv din tilbakemelding her" id="feedback" v-model="state.feedbackData.feedback" required></textarea>
+        <input type="submit" value="Send" id="submit" :disabled="disableSubmit"</input>
     </form>
 </template>
 
@@ -84,4 +100,15 @@ label {
     justify-self: center;
     align-self: center;
 }
+
+#closeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
 </style>
