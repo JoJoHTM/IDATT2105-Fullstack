@@ -1,13 +1,17 @@
 <script setup>
-import { ref } from 'vue';
 import RouterButtons from './RouterButtons.vue';
 import store from '../store.js';
+import axios from 'axios';
 import json from '../assets/formSubmission.json';
 
 const { state, disableSubmit } = store;
 
 function showPopup() {
     const popup = document.getElementById('popup');
+    axios.get("http://localhost:3000/response").then(response => {
+        const data = response.data.success;
+        popup.getElementsByTagName('h2')[0].innerText = data;
+    })
     popup.showModal();
 }
 
@@ -26,7 +30,7 @@ function closePopUp() {
     <h1 style="text-align: center;">Tilbakemelding</h1>
     <RouterButtons />
     <dialog id="popup">
-        <h2>Takk for tilbakemeldingen!</h2>
+        <h2></h2>
         <button @click="closePopUp" id="closeButton">X</button>
     </dialog>
     <form @submit="submitForm">
