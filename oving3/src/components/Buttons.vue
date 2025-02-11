@@ -78,10 +78,11 @@
         try {
             state.calculatorData.totalValue = eval(state.calculatorData.operations.join('')).toString();
             console.log(state.calculatorData.operations);
-            addRow();
+            //addRow();
             state.calculatorData.operations.length = 0;
             state.calculatorData.currentValue = state.calculatorData.totalValue;
             prevAnswer.value = state.calculatorData.totalValue;
+            console.log(state.calculatorData);
         } catch (error) {
             console.error("Error evaluating expression:", error);
             state.calculatorData.totalValue = "Error";
@@ -89,10 +90,6 @@
             state.calculatorData.operations.length = 0;
         }
     }
-
-    defineExpose({
-        clear
-    })
 </script>
 
 

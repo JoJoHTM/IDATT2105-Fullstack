@@ -14,7 +14,6 @@ const state = reactive({
 });
 
 const disableSubmit = computed(() => {
-    console.log("meow");
     return state.feedbackData.name === '' || state.feedbackData.email === '' || state.feedbackData.feedback === '';
 });
 
