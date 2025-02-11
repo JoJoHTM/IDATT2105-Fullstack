@@ -3,10 +3,6 @@
     import { watch } from 'vue';
     const { state } = store;
 
-    watch((state.calculatorData.totalValue), async () => {
-        addRow();
-    })
-
     export function useRow() {
 
         function addRow() {

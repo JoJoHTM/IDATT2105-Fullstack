@@ -1,4 +1,4 @@
-import { reactive, computed } from 'vue';
+import { reactive, computed, ref } from 'vue';
 
 const state = reactive({
     feedbackData: {
@@ -16,6 +16,7 @@ const state = reactive({
 const disableSubmit = computed(() => {
     return state.feedbackData.name === '' || state.feedbackData.email === '' || state.feedbackData.feedback === '';
 });
+
 
 export default {
     state,

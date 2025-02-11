@@ -1,13 +1,11 @@
 <script setup>
     import { ref } from 'vue';
-    import { useRow } from './History.vue';
     import store from '../store.js';
-    
-    const { addRow } = useRow();
-
+    import { useRow } from './History.vue';
     const prevAnswer = ref("0");
     const paranthesis = ref(false);
 
+    const { addRow } = useRow();
     const { state } = store;
 
     function changeCurrentValue(event) {
@@ -78,14 +76,14 @@
         try {
             state.calculatorData.totalValue = eval(state.calculatorData.operations.join('')).toString();
             console.log(state.calculatorData.operations);
-            //addRow();
+            addRow();
             state.calculatorData.operations.length = 0;
             state.calculatorData.currentValue = state.calculatorData.totalValue;
             prevAnswer.value = state.calculatorData.totalValue;
             console.log(state.calculatorData);
         } catch (error) {
             console.error("Error evaluating expression:", error);
-            state.calculatorData.totalValue = "Error";
+            state.calculatorData.totalValue = "error";
             state.calculatorData.currentValue = state.calculatorData.totalValue;
             state.calculatorData.operations.length = 0;
         }
