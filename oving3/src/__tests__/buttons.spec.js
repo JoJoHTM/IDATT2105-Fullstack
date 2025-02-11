@@ -62,7 +62,6 @@ describe('Buttons', () => {
         
         wrapper.find('#equals').trigger('click');
         wrapper.vm.$nextTick(); // Wait for DOM update
-        historyWrapper.vm.$nextTick(); // Wait for DOM update
         console.log(state.calculatorData); // Log the state to debug
         
         // Check the final state
