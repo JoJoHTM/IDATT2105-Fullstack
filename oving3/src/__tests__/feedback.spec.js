@@ -7,8 +7,8 @@ import store from '../store.js';
 const { state } = store;
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes: []
+    history: createWebHistory(),
+    routes: []
 });
 
 describe('Feedback', () => {

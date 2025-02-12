@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { mount } from '@vue/test-utils';  
 import Buttons from '../components/Buttons.vue';
 
@@ -6,6 +6,13 @@ import store from '../store.js';
 
 const {state} = store;
 
+// Mock addRow funksjon. Testen under feiler fordi equals() kaller
+// addRow() som prøver å manipulere DOMen som ikke eksisterer og returnerer error.
+vi.mock('../components/History.vue', () => ({
+    useRow: () => ({
+        addRow: vi.fn(),
+    }),
+}));
 
 describe('Buttons', () => {
     it('should render the buttons', () => {
@@ -65,7 +72,7 @@ describe('Buttons', () => {
         console.log(state.calculatorData); // Log the state to debug
         
         // Check the final state
-        expect(state.calculatorData.currentValue).toBe("10");
+        expect(state.calculatorData.totalValue).toBe("10");
     });
 });
 
