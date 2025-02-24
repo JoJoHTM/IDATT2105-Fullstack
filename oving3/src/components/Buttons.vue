@@ -75,20 +75,17 @@ import axios from 'axios';
         }
 
         try {
-            axios.post("http://localhost:8080/", state.calculatorData.operations);
-            state.calculatorData.totalValue = eval(state.calculatorData.operations.join('')).toString();
-            console.log(state.calculatorData.operations);
-            addRow();
-            state.calculatorData.operations.length = 0;
-            state.calculatorData.currentValue = state.calculatorData.totalValue;
-            prevAnswer.value = state.calculatorData.totalValue;
-            console.log(state.calculatorData);
-        } catch (error) {
-            console.error("Error evaluating expression:", error);
-            state.calculatorData.totalValue = "error";
-            state.calculatorData.currentValue = state.calculatorData.totalValue;
-            state.calculatorData.operations.length = 0;
-        }
+            axios.post("http://localhost:8080/", state.calculatorData.operations)
+                .then(response => {
+                    state.calculatorData.totalValue = response.data;
+                    addRow();
+                    state.calculatorData.operations.length = 0;
+                    state.calculatorData.currentValue = state.calculatorData.totalValue;
+                    prevAnswer.value = state.calculatorData.totalValue;
+                });
+            } catch (error) {
+                console.error(error);
+            }   
     }
 </script>
 
