@@ -1,5 +1,7 @@
 package com.oving4.oving4.service;
 
+import com.oving4.oving4.model.CalculationModel;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -13,8 +15,8 @@ public class CalculatorService {
     ScriptEngineManager manager = new ScriptEngineManager();
     this.engine = manager.getEngineByName("nashorn");
   }
-  public String calculations(ArrayList<String> operations) throws ScriptException {
-    String equation = String.join("", operations);
+  public String calculate(CalculationModel request) throws ScriptException {
+    String equation = String.join("", request.getOperations());
     try {
       return engine.eval(equation).toString();
     }
