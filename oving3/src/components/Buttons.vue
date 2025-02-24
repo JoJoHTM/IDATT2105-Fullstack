@@ -2,6 +2,7 @@
     import { ref } from 'vue';
     import store from '../store.js';
     import { useRow } from './History.vue';
+import axios from 'axios';
     const prevAnswer = ref("0");
     const paranthesis = ref(false);
 
@@ -74,6 +75,7 @@
         }
 
         try {
+            axios.post("http://localhost:8080/", state.calculatorData.operations);
             state.calculatorData.totalValue = eval(state.calculatorData.operations.join('')).toString();
             console.log(state.calculatorData.operations);
             addRow();
