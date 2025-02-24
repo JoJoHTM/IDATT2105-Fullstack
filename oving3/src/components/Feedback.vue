@@ -2,7 +2,6 @@
 import RouterButtons from './RouterButtons.vue';
 import store from '../store.js';
 import axios from 'axios';
-import json from '../assets/formSubmission.json';
 
 const { state, disableSubmit } = store;
 
@@ -40,7 +39,7 @@ function closePopUp() {
         <input type="email" placeholder="Email" id="email" v-model="state.feedbackData.email" required></input>
         <label for="feedback" id="feedbacktekst">Tilbakemelding:</label>
         <textarea placeholder="Skriv din tilbakemelding her" id="feedback" v-model="state.feedbackData.feedback" required></textarea>
-        <input type="submit" value="Send" id="submit" :disabled="disableSubmit"</input>
+        <input type="submit" value="Send" id="submit" :disabled="disableSubmit"></input>
     </form>
 </template>
 

@@ -1,13 +1,12 @@
 <script setup>
     import { ref } from 'vue';
-    import { useRow } from './History.vue';
     import store from '../store.js';
-    
-    const { addRow } = useRow();
-
+    import { useRow } from './History.vue';
+import axios from 'axios';
     const prevAnswer = ref("0");
     const paranthesis = ref(false);
 
+    const { addRow } = useRow();
     const { state } = store;
 
     function changeCurrentValue(event) {
@@ -76,18 +75,17 @@
         }
 
         try {
-            state.calculatorData.totalValue = eval(state.calculatorData.operations.join('')).toString();
-            console.log(state.calculatorData.operations);
-            addRow();
-            state.calculatorData.operations.length = 0;
-            state.calculatorData.currentValue = state.calculatorData.totalValue;
-            prevAnswer.value = state.calculatorData.totalValue;
-        } catch (error) {
-            console.error("Error evaluating expression:", error);
-            state.calculatorData.totalValue = "Error";
-            state.calculatorData.currentValue = state.calculatorData.totalValue;
-            state.calculatorData.operations.length = 0;
-        }
+            axios.post("http://localhost:8080/", state.calculatorData.operations)
+                .then(response => {
+                    state.calculatorData.totalValue = response.data;
+                    addRow();
+                    state.calculatorData.operations.length = 0;
+                    state.calculatorData.currentValue = state.calculatorData.totalValue;
+                    prevAnswer.value = state.calculatorData.totalValue;
+                });
+            } catch (error) {
+                console.error(error);
+            }   
     }
 </script>
 
