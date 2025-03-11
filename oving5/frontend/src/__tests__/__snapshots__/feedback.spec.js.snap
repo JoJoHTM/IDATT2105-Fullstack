@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Feedback > should render the feedback form 1`] = `
+"<h1 data-v-a4640159="" style="text-align: center;">Tilbakemelding</h1>
+<div data-v-7101c98d="" data-v-a4640159=""><a data-v-7101c98d="" href="/" class="" style="border-right: 2px solid orange; margin-bottom: 20px;"><button data-v-7101c98d="">Kalkulator</button></a><a data-v-7101c98d="" href="/feedback" class=""><button data-v-7101c98d="">Tilbakemelding</button></a></div>
+<dialog data-v-a4640159="" id="popup">
+  <h2 data-v-a4640159=""></h2><button data-v-a4640159="" id="closeButton">X</button>
+</dialog>
+<form data-v-a4640159=""><label data-v-a4640159="" for="name">Navn:</label><input data-v-a4640159="" type="text" placeholder="Navn" id="name" required=""><label data-v-a4640159="" for="email">E-post:</label><input data-v-a4640159="" type="email" placeholder="Email" id="email" required=""><label data-v-a4640159="" for="feedback" id="feedbacktekst">Tilbakemelding:</label><textarea data-v-a4640159="" placeholder="Skriv din tilbakemelding her" id="feedback" required=""></textarea><input data-v-a4640159="" type="submit" id="submit" disabled="" value="Send"></form>"
+`;

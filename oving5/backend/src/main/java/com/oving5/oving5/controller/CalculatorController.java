@@ -1,7 +1,7 @@
-package com.oving4.oving4.controller;
+package com.oving5.oving5.controller;
 
-import com.oving4.oving4.model.CalculationModel;
-import com.oving4.oving4.service.CalculatorService;
+import com.oving5.oving5.model.CalculationModel;
+import com.oving5.oving5.service.CalculatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,12 +24,6 @@ public class CalculatorController {
     public Map<String, String> handlePostRequest(@RequestBody CalculationModel request) throws ScriptException {
 
         String result = calculatorService.calculate(request);
-        logger.trace(result);
-        logger.debug(result);
-        logger.info(String.valueOf(request));
-        logger.warn(String.valueOf(request));
-        logger.error(String.valueOf(request));
-
         Map<String, String> response = new HashMap<String, String>();
         response.put("result", result);
         return response;
