@@ -10,6 +10,14 @@ const state = reactive({
         currentValue: "0",
         totalValue: "0",
         operations: []
+    },
+    loginData: {
+        username: '',
+        password: ''
+    },
+    registerData: {
+        username: '',
+        password: ''
     }
 });
 

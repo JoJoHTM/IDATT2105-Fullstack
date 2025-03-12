@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory} from 'vue-router'
 
 const routes = [
-    {path: '/', name: 'Calculator', component: () => import('../components/Calculator.vue')},
+    {path: '/', name: 'Login', component: () => import('../components/Login.vue')},
+    {path: '/calculator', name: 'Calculator', component: () => import('../components/Calculator.vue')},
     {path: '/feedback', name: 'Feedback', component: () => import('../components/Feedback.vue')},
 ]
 
