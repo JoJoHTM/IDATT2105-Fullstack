@@ -1,6 +1,7 @@
 <script setup>
     import store from '../store.js';
     import axios from 'axios';
+    import { RouterLink } from 'vue-router';
     const loginData = store.state.loginData;
     const registerData = store.state.registerData;
 
@@ -16,17 +17,19 @@
 
     function registerDatabase(event) {
         event.preventDefault();
-        axios.post("http://localhost:3000/register", registerData).then(response => {
+        axios.post("http://localhost:8080/register", registerData).then(response => {
             console.log(response.data);
         })
     }
 
     function login(event) {
         event.preventDefault();
-        axios.post("http://localhost:3000/login", loginData).then(response => {
+        axios.post("http://localhost:8080/login", loginData).then(response => {
             console.log(response.data);
+            if (response.data === "Login successful") {
+                
+            }
         })
-
     }
 
 </script>

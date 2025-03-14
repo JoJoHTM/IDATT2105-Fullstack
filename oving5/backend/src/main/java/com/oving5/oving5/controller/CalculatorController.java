@@ -20,11 +20,11 @@ public class CalculatorController {
     Logger logger = LoggerFactory.getLogger(CalculatorController.class);
     private CalculatorService calculatorService = new CalculatorService();
 
-    @PostMapping("/")
+    @PostMapping("/calculator")
     public Map<String, String> handlePostRequest(@RequestBody CalculationModel request) throws ScriptException {
 
         String result = calculatorService.calculate(request);
-        Map<String, String> response = new HashMap<String, String>();
+        Map<String, String> response = new HashMap <String, String>();
         response.put("result", result);
         return response;
     }

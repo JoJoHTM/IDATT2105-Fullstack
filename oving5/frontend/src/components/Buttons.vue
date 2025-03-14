@@ -75,7 +75,7 @@ import axios from 'axios';
         }
 
         try {
-            axios.post("http://localhost:8080/", { operations: state.calculatorData.operations})
+            axios.post("http://localhost:8080/calculator", { operations: state.calculatorData.operations})
                 .then(response => {
                     state.calculatorData.totalValue = response.data.result;
                     console.log(response);
