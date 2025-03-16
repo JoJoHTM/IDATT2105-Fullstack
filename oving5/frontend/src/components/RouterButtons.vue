@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup>
 import { RouterLink } from 'vue-router';
 
 </script>
 
 <template>
     <div>
-        <RouterLink to="/" style="border-right: 2px solid orange; margin-bottom: 20px;">
+        <RouterLink to="/calculator" style="border-right: 2px solid orange; margin-bottom: 20px;">
             <button>Kalkulator</button>
         </RouterLink>
         <RouterLink to="/feedback">

@@ -1,7 +1,7 @@
 <script setup>
     import store from '../store.js';
     import axios from 'axios';
-    import { RouterLink } from 'vue-router';
+    import routes from '../router/index.js';
     const loginData = store.state.loginData;
     const registerData = store.state.registerData;
 
@@ -27,7 +27,11 @@
         axios.post("http://localhost:8080/login", loginData).then(response => {
             console.log(response.data);
             if (response.data === "Login successful") {
-                
+                loginData.loggedIn = true;
+                routes.push('/calculator');
+            }
+            else {
+                alert("Login failed, wrong username and or password");
             }
         })
     }

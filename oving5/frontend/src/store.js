@@ -13,7 +13,8 @@ const state = reactive({
     },
     loginData: {
         username: '',
-        password: ''
+        password: '',
+        loggedIn: false
     },
     registerData: {
         username: '',
