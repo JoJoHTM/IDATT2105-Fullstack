@@ -1,6 +1,7 @@
 <script>
+    import { onMounted } from 'vue';
     import store from '../store.js';
-    import { watch } from 'vue';
+    import axios from 'axios';
     const { state } = store;
 
     export function useRow() {
@@ -16,7 +17,27 @@
         return { addRow };
     }
 
+    function getLogs() {
+        console.log("giggidy giggidy goo");
+        axios.post("http://localhost:8080/getLogs", { id: state.loginData.loginID })
+            .then(response => {
+                let history = document.getElementById('history');
+                response.data.forEach(log => {
+                    let row = document.createElement('li');
+                    row.className = 'row';
+                    row.innerHTML = log;
+                    history.appendChild(row);
+                });
+            });
+    }
 
+    export default {
+        setup() {
+            onMounted(() => {
+                getLogs();
+            });
+        }
+    }
 </script>
 
 

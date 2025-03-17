@@ -4,6 +4,7 @@ import com.oving5.oving5.model.CalculationModel;
 import com.oving5.oving5.service.CalculatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

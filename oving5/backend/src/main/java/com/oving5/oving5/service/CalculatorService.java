@@ -1,6 +1,7 @@
 package com.oving5.oving5.service;
 
 import com.oving5.oving5.model.CalculationModel;
+import com.oving5.oving5.repository.DatabaseRepository;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -17,7 +18,10 @@ public class CalculatorService {
   public String calculate(CalculationModel request) throws ScriptException {
     String equation = String.join("", request.getOperations());
     try {
-      return engine.eval(equation).toString();
+      String solution = engine.eval(equation).toString();
+      equation = equation + "=" + solution;
+      DatabaseRepository.storeLog(request.getId(), equation);
+      return solution;
     }
     catch (ScriptException e) {
       return "error";

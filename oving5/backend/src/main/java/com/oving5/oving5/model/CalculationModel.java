@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 public class CalculationModel {
     private ArrayList<String> operations;
+    private int id;
 
     public ArrayList<String> getOperations() {
         return operations;
     }
-
-    public void setOperations(ArrayList<String> operations) {
-        this.operations = operations;
+    public int getId() {
+        return id;
     }
+
 }

@@ -2,7 +2,7 @@
     import { ref } from 'vue';
     import store from '../store.js';
     import { useRow } from './History.vue';
-import axios from 'axios';
+    import axios from 'axios';
     const prevAnswer = ref("0");
     const paranthesis = ref(false);
 
@@ -75,10 +75,10 @@ import axios from 'axios';
         }
 
         try {
-            axios.post("http://localhost:8080/calculator", { operations: state.calculatorData.operations})
+            console.log(state.loginData.loginID);
+            axios.post("http://localhost:8080/calculator", { operations: state.calculatorData.operations, id: state.loginData.loginID })
                 .then(response => {
                     state.calculatorData.totalValue = response.data.result;
-                    console.log(response);
                     addRow();
                     state.calculatorData.operations.length = 0;
                     state.calculatorData.currentValue = state.calculatorData.totalValue;

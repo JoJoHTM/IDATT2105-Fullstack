@@ -26,8 +26,10 @@
         event.preventDefault();
         axios.post("http://localhost:8080/login", loginData).then(response => {
             console.log(response.data);
-            if (response.data === "Login successful") {
+            if (response.data != 0) {
                 loginData.loggedIn = true;
+                loginData.loginID = response.data;
+                console.log(loginData.loginID);
                 routes.push('/calculator');
             }
             else {
