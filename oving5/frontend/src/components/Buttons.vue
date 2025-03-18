@@ -3,6 +3,7 @@
     import store from '../store.js';
     import { useRow } from './History.vue';
     import axios from 'axios';
+import { calculateExpression } from '@/utils/authService.js';
     const prevAnswer = ref("0");
     const paranthesis = ref(false);
 
@@ -75,15 +76,21 @@
         }
 
         try {
-            console.log(state.loginData.loginID);
-            axios.post("http://localhost:8080/calculator", { operations: state.calculatorData.operations, id: state.loginData.loginID })
+            calculateExpression(state.loginData.username,state.calculatorData.operations, sessionStorage.jwtToken).then(response => {
+                state.calculatorData.totalValue = response.result;
+                addRow();
+                state.calculatorData.operations.length = 0;
+                state.calculatorData.currentValue = state.calculatorData.totalValue;
+                prevAnswer.value = state.calculatorData.totalValue;
+            });
+            /*axios.post("http://localhost:8080/calculator", { operations: state.calculatorData.operations })
                 .then(response => {
                     state.calculatorData.totalValue = response.data.result;
                     addRow();
                     state.calculatorData.operations.length = 0;
                     state.calculatorData.currentValue = state.calculatorData.totalValue;
                     prevAnswer.value = state.calculatorData.totalValue;
-                });
+                });*/
             } catch (error) {
                 console.error(error);
             }   

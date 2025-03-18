@@ -1,4 +1,4 @@
-import { reactive, computed, ref } from 'vue';
+import { reactive, computed} from 'vue';
 
 const state = reactive({
     feedbackData: {
@@ -13,9 +13,7 @@ const state = reactive({
     },
     loginData: {
         username: '',
-        password: '',
-        loggedIn: false,
-        loginID: 0
+        password: ''
     },
     registerData: {
         username: '',

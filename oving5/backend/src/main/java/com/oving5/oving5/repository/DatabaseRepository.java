@@ -36,12 +36,15 @@ public class DatabaseRepository {
         }
     }
 
-    public static void storeLog(int id, String equation) {
+    public static void storeLog(String username, String equation) {
+        String idQuery = "select UserID from users where UserName=?";
+        int id = jdbcTemplate.queryForObject(idQuery, Integer.class, username);
         String query = "insert into logs (UserID, Equation) values (?,?)";
         jdbcTemplate.update(query, id, equation);
     }
 
-    public static List<String> getLogs(int id) {
+    public static List<String> getLogs(String userName) {
+        int id = jdbcTemplate.queryForObject("select UserID from users where UserName=?", Integer.class, userName);
         String query = "select Equation from logs where UserID=? order by ID limit 10";
         System.out.println("fetching query");
         System.out.println(jdbcTemplate.queryForList(query, String.class, id));

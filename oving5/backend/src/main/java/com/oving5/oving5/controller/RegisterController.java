@@ -2,9 +2,6 @@ package com.oving5.oving5.controller;
 
 import com.oving5.oving5.model.RegisterModel;
 import com.oving5.oving5.repository.DatabaseRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;

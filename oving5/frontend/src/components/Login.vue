@@ -2,6 +2,7 @@
     import store from '../store.js';
     import axios from 'axios';
     import routes from '../router/index.js';
+    import { getJwtToken } from '../utils/authService.js';
     const loginData = store.state.loginData;
     const registerData = store.state.registerData;
 
@@ -24,9 +25,25 @@
 
     function login(event) {
         event.preventDefault();
-        axios.post("http://localhost:8080/login", loginData).then(response => {
-            console.log(response.data);
-            if (response.data != 0) {
+        try {
+            getJwtToken(loginData.username, loginData.password).then((token) => {
+                if (token) {
+                    console.log("JWT token: ", token);
+                    sessionStorage.setItem('jwtToken', token);
+                    sessionStorage.setItem('username', loginData.username);
+                    routes.push('/calculator');
+                }
+                else {
+                    alert("Login failed, wrong username and or password");
+                }
+            })
+        }
+        catch (error) {
+            console.log(error);
+        }
+        /*axios.post("http://localhost:8080/token", loginData).then((token)) => {
+            if (token) {
+                console.log("JWT token: ", token);
                 loginData.loggedIn = true;
                 loginData.loginID = response.data;
                 console.log(loginData.loginID);
@@ -35,7 +52,7 @@
             else {
                 alert("Login failed, wrong username and or password");
             }
-        })
+        })*/
     }
 
 </script>

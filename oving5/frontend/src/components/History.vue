@@ -2,6 +2,7 @@
     import { onMounted } from 'vue';
     import store from '../store.js';
     import axios from 'axios';
+    import { userDetails } from '../utils/authService.js';
     const { state } = store;
 
     export function useRow() {
@@ -19,16 +20,20 @@
 
     function getLogs() {
         console.log("giggidy giggidy goo");
-        axios.post("http://localhost:8080/getLogs", { id: state.loginData.loginID })
-            .then(response => {
+        try {
+            userDetails(sessionStorage.username, sessionStorage.jwtToken).then((logs) => {
                 let history = document.getElementById('history');
-                response.data.forEach(log => {
+                logs.forEach(log => {
                     let row = document.createElement('li');
                     row.className = 'row';
                     row.innerHTML = log;
                     history.appendChild(row);
                 });
-            });
+            })
+        }
+        catch (error) {
+            console.error(error);
+        }
     }
 
     export default {
